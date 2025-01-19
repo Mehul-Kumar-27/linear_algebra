@@ -1,36 +1,43 @@
 #include <iostream>
 #include <vector>
+#include <stdexcept>
 using namespace std;
 
-/// @brief Multiplies teh matrix with a scalar
-/// @param matrix
-/// @param scalar
-void scalarMultiplication(vector<vector<int>> &matrix, int scalar)
+class Matrix
 {
-    int rows = matrix.size();
-    int columns = matrix[1].size();
+private:
+  vector<vector<int>> data;
+  int rows;
+  int columns;
 
+public:
+  Matrix(const vector<vector<int>> matrix_data)
+  {
+    if (matrix_data.size() == 0 || matrix_data[0].size() == 0)
+    {
+      throw invalid_argument("matrix should have atleast one element to be initialized!");
+    }
+
+    for (int i = 0; i < matrix_data[0].size(); i++)
+    {
+      for (int j = 0; j < matrix_data.size(); j++)
+      {
+        data[j][i] = matrix_data[j][i];
+      }
+    }
+    rows = data.size();
+    columns = data[0].size();
+  };
+  /// @brief Multiplies teh matrix with a scalar
+  /// @param scalar the scalar with which the matrix would be multiplied
+  void scalarMultiplication(int scalar)
+  {
     for (int i = 0; i < rows; i++)
     {
-        for (int j = 0; j < columns; j++)
-        {
-            matrix[i][j] *= scalar;
-        }
+      for (int j = 0; i < columns; i++)
+      {
+        data[i][j] *= scalar;
+      }
     }
-}
-
-/// @brief  This function is going to take in two matrixes and multiply them
-/// @param m1 represents the matrix that is going to be on the left hand side
-/// @param m2 represents the matrix that is going to be on the right hand side
-/// @return is a vector<int> type which would contain the solution matrix
-vector<vector<int>> simpleMultiply(vector<vector<int>> m1, vector<vector<int>> m2)
-{
-    /// Check if we can multiply the two matrixes
-    if (m1[0].size() != m2.size())
-    {
-        /// We cannot multiply the two matrixes
-        throw invalid_argument("Matrixes dimensions do not match for multiplication");
-    }
-
-    vector<vector<int>> solution;
-}
+  }
+};
