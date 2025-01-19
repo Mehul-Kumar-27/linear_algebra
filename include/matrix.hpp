@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <stdexcept>
-#include "vectors/vectors.h"
+#include "vectors.hpp"
 using namespace std;
 
 class Matrix
@@ -19,8 +19,8 @@ public:
             throw invalid_argument("matrix should have atleast one element to be initialized!");
         }
 
-        int rows = matrix_data.size();
-        int columns = matrix_data[0].size();
+        rows = matrix_data.size();
+        columns = matrix_data[0].size();
         data = matrix_data;
     };
 
@@ -43,7 +43,7 @@ public:
     {
         for (int i = 0; i < rows; i++)
         {
-            for (int j = 0; i < columns; i++)
+            for (int j = 0; j < columns; j++)
             {
                 data[i][j] *= scalar;
             }
